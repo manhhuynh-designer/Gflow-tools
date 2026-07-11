@@ -7,7 +7,7 @@ import { GenHistoryItem, SceneObject, AspectRatio } from './type';
 // Design System Components
 const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="flex items-center px-2">
-    <span className="text-[11px] font-medium text-[rgba(218,220,224,0.9)] tracking-[0.1px] normal-case">
+    <span className="text-[10px] font-semibold text-cds-text-secondary tracking-[1.5px] uppercase font-mono">
       {children}
     </span>
   </div>
@@ -19,15 +19,15 @@ const PillButton: React.FC<{
   disabled?: boolean;
   className?: string;
 }> = ({ icon, children, variant = 'filled', onClick, disabled, className = '' }) => {
-  const base = 'flex items-center gap-[2px] justify-center h-[34px] rounded-xl font-medium tracking-[0.1px] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
+  const base = 'flex items-center gap-[4px] justify-center h-[34px] rounded-xl font-medium tracking-[0.5px] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-mono';
   const variants: Record<string, string> = {
-    filled: 'bg-[#969696] hover:bg-[#a6a6a6] active:bg-[#868686] text-black text-[11px] pl-[8px] pr-[24px] py-1 select-none',
-    outline: 'border border-[#595959] hover:bg-white/5 active:bg-white/10 backdrop-blur-[40px] text-[12px] pl-[8px] pr-[16px] py-2 text-white select-none',
-    solid: 'bg-white hover:bg-gray-200 active:bg-gray-300 text-black text-[12px] pl-[8px] pr-[16px] py-2 select-none',
+    filled: 'bg-cds-layer2 hover:bg-cds-border-strong active:bg-cds-layer1 text-cds-text-primary text-[11px] pl-[8px] pr-[16px] py-1 select-none border border-cds-border-subtle',
+    outline: 'border border-cds-border-subtle hover:bg-cds-layer1 active:bg-cds-layer2 text-[11px] pl-[8px] pr-[16px] py-2 text-cds-text-secondary select-none',
+    solid: 'bg-cds-interactive hover:bg-cds-interactive-hover active:bg-cds-interactive-active text-white text-[11px] pl-[8px] pr-[16px] py-2 select-none',
   };
   return (
     <button className={`${base} ${variants[variant]} ${className}`} onClick={onClick} disabled={disabled}>
-      {icon && <span className="flex items-center justify-center w-6 h-6">{icon}</span>}
+      {icon && <span className="flex items-center justify-center w-5 h-5">{icon}</span>}
       <span className="truncate">{children}</span>
     </button>
   );
@@ -52,19 +52,19 @@ const FieldDropdown: React.FC<{
   return (
     <div ref={ref} className={`relative ${className}`}>
       <button type="button" onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left border border-[#595959] hover:border-[#7a7a7a] transition-colors rounded-xl flex flex-col gap-0.5 justify-center pb-2 pl-2.5 pr-1 pt-[5px] select-none focus:outline-none min-h-[49px]">
-        <p className="text-[11px] font-medium text-[rgba(255,255,255,0.35)] tracking-[0.1px]">{label}</p>
+        className="w-full text-left border border-cds-border-subtle hover:border-cds-border-strong bg-cds-layer1 transition-colors rounded-xl flex flex-col gap-0.5 justify-center pb-2 pl-2.5 pr-1 pt-[5px] select-none focus:outline-none min-h-[49px]">
+        <p className="text-[10px] font-semibold text-cds-text-muted tracking-[0.5px] font-mono uppercase">{label}</p>
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-medium text-white tracking-[0.1px] truncate mr-1">{value}</span>
-          <span className={`material-symbols-outlined text-[16px] text-[rgba(218,220,224,0.5)] mr-1 transition-transform ${isOpen ? 'rotate-180' : ''}`}>keyboard_arrow_down</span>
+          <span className="text-[11px] font-medium text-cds-text-primary tracking-[0.1px] truncate mr-1 font-mono">{value}</span>
+          <span className={`material-symbols-outlined text-[16px] text-cds-text-muted mr-1 transition-transform ${isOpen ? 'rotate-180' : ''}`}>keyboard_arrow_down</span>
         </div>
       </button>
       {isOpen && (
-        <div className="absolute z-[100] bottom-[calc(100%+4px)] left-0 w-full bg-[#0e0e0e] border border-[#595959] rounded-xl overflow-hidden shadow-xl backdrop-blur-md animate-dropdown origin-bottom">
+        <div className="absolute z-[100] bottom-[calc(100%+4px)] left-0 w-full bg-cds-layer1 border border-cds-border-subtle rounded-xl overflow-hidden shadow-xl backdrop-blur-md animate-dropdown origin-bottom">
           <div className="max-h-40 overflow-y-auto custom-scrollbar">
             {options.map((opt) => (
               <button key={opt} type="button"
-                className={`w-full text-left px-2.5 py-2 text-[11px] font-medium tracking-[0.1px] hover:bg-[#1a1a1a] transition-colors ${value === opt ? 'bg-[#1a1a1a] text-white' : 'text-[rgba(218,220,224,0.9)]'}`}
+                className={`w-full text-left px-2.5 py-2 text-[11px] font-medium tracking-[0.1px] hover:bg-cds-layer2 transition-colors font-mono ${value === opt ? 'bg-cds-layer2 text-cds-text-primary' : 'text-cds-text-secondary'}`}
                 onClick={() => { onChange(opt); setIsOpen(false); }}>
                 {opt}
               </button>
@@ -122,20 +122,20 @@ const DragNumberField: React.FC<{
   };
 
   return (
-    <div className={`border border-[#595959] hover:border-[#7a7a7a] rounded-xl flex flex-col gap-0.5 justify-center pb-2 pl-2.5 pr-1 pt-[5px] select-none transition-colors ${isEditing ? '' : 'cursor-ns-resize'} ${className} min-h-[49px]`}
+    <div className={`border border-cds-border-subtle hover:border-cds-border-strong bg-cds-layer1 rounded-xl flex flex-col gap-0.5 justify-center pb-2 pl-2.5 pr-1 pt-[5px] select-none transition-colors ${isEditing ? '' : 'cursor-ns-resize'} ${className} min-h-[49px]`}
       onMouseDown={handleMouseDown}>
-      <p className="text-[11px] font-medium text-[rgba(255,255,255,0.35)] tracking-[0.1px]">{label}</p>
+      <p className="text-[10px] font-semibold text-cds-text-muted tracking-[0.5px] font-mono uppercase">{label}</p>
       <div className="flex items-center justify-between">
         {isEditing ? (
           <input ref={inputRef} type="text" value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') commitEdit(editValue); if (e.key === 'Escape') setIsEditing(false); }}
             onBlur={() => commitEdit(editValue)}
-            className="bg-transparent text-[11px] font-medium text-white tracking-[0.1px] outline-none w-full border-none p-0 m-0" autoFocus />
+            className="bg-transparent text-[11px] font-medium text-cds-text-primary tracking-[0.1px] outline-none w-full border-none p-0 m-0 font-mono" autoFocus />
         ) : (
           <>
-            <span className="text-[11px] font-medium text-white tracking-[0.1px] cursor-text">{value}{suffix}</span>
-            <div className="flex flex-col items-center mr-1.5 -gap-px text-white/40">
+            <span className="text-[11px] font-medium text-cds-text-primary tracking-[0.1px] cursor-text font-mono">{value}{suffix}</span>
+            <div className="flex flex-col items-center mr-1.5 -gap-px text-cds-text-muted">
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M5 0L9 5H1L5 0Z" fill="currentColor"/></svg>
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M5 6L1 1H9L5 6Z" fill="currentColor"/></svg>
             </div>
@@ -193,7 +193,7 @@ export default function App() {
     style.textContent = `
       .animate-shimmer { animation: shimmer 1.5s infinite; }
       @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-      html, body, #root { margin: 0; padding: 0; width: 100%; height: 100%; background: #0e0e0e; font-family: 'Google Sans Text', 'Google Sans', sans-serif; letter-spacing: 0.1px; }
+      html, body, #root { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--cds-background); font-family: var(--font-sans); letter-spacing: 0.1px; }
       .custom-scrollbar::-webkit-scrollbar { width: 4px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
       .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
@@ -336,11 +336,11 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#0e0e0e] text-white overflow-hidden">
+    <div className="flex flex-col h-screen w-screen bg-cds-background text-cds-text-primary overflow-hidden">
       <div className="flex flex-1 overflow-hidden">
         
         {/* Left Panel */}
-        <div className="relative border-r border-[rgba(218,220,224,0.15)] flex flex-col items-start overflow-clip px-[10px] py-[12px] w-[300px] h-full bg-[#0e0e0e]">
+        <div className="relative border-r border-cds-border-subtle flex flex-col items-start overflow-clip px-[10px] py-[12px] w-[300px] h-full bg-cds-background">
           <div className="flex flex-col gap-[24px] items-start w-full overflow-y-auto custom-scrollbar pr-1">
             
             <div className="flex flex-col gap-2 items-start w-full">
@@ -356,12 +356,12 @@ export default function App() {
 
             <div className="flex flex-col gap-2 items-start w-full">
               <SectionLabel>Transform Mode</SectionLabel>
-              <div className="flex w-full items-center border border-[#595959] rounded-xl overflow-hidden bg-transparent">
+              <div className="flex w-full items-center border border-cds-border-subtle rounded-xl overflow-hidden bg-cds-layer1">
                 {(['translate', 'rotate', 'scale'] as const).map(mode => (
                   <button 
                     key={mode}
                     onClick={() => setTransformMode(mode)}
-                    className={`flex-1 flex items-center justify-center h-[34px] transition-all ${transformMode === mode ? 'bg-[#969696] text-black' : 'text-white/40 hover:text-white'}`}
+                    className={`flex-1 flex items-center justify-center h-[34px] transition-all ${transformMode === mode ? 'bg-cds-interactive text-white' : 'text-cds-text-muted hover:text-cds-text-primary'}`}
                   >
                     <span className="material-symbols-outlined text-[18px]">
                       {mode === 'translate' ? 'open_with' : mode === 'rotate' ? 'restart_alt' : 'aspect_ratio'}
@@ -385,14 +385,14 @@ export default function App() {
                 
                 <div className="mt-2 flex flex-col gap-1 w-full max-h-[200px] overflow-y-auto custom-scrollbar">
                   {sceneObjects.map(obj => (
-                    <div key={obj.id} onClick={() => setSelectedId(obj.id)} className={`flex items-center justify-between px-3 py-2 rounded-lg border cursor-pointer transition-all ${selectedId === obj.id ? 'border-[#969696] bg-white/5' : 'border-[#595959] hover:border-[#7a7a7a]'}`}>
-                      <span className="text-[11px] truncate w-[160px]">{obj.name}</span>
-                      <button onClick={(e) => { e.stopPropagation(); removeObject(obj.id); }} className="text-white/30 hover:text-red-400">
+                    <div key={obj.id} onClick={() => setSelectedId(obj.id)} className={`flex items-center justify-between px-3 py-2 rounded-lg border cursor-pointer transition-all ${selectedId === obj.id ? 'border-cds-border-strong bg-cds-layer2' : 'border-cds-border-subtle hover:border-cds-border-strong bg-cds-layer1'}`}>
+                      <span className="text-[11px] truncate w-[160px] font-mono">{obj.name}</span>
+                      <button onClick={(e) => { e.stopPropagation(); removeObject(obj.id); }} className="text-cds-text-muted hover:text-cds-support-error">
                         <span className="material-symbols-outlined text-[16px]">delete</span>
                       </button>
                     </div>
                   ))}
-                  {sceneObjects.length === 0 && <p className="text-[10px] text-white/20 text-center py-4 italic">No objects in scene</p>}
+                  {sceneObjects.length === 0 && <p className="text-[10px] text-cds-text-muted text-center py-4 italic font-mono">No objects in scene</p>}
                 </div>
               </div>
             </div>
@@ -404,13 +404,13 @@ export default function App() {
               <SectionLabel>Pen Overlay</SectionLabel>
               <button 
                 onClick={() => setIsDrawingMode(!isDrawingMode)}
-                className={`flex items-center gap-2 justify-center w-full h-[34px] rounded-xl transition-all ${isDrawingMode ? 'bg-[#969696] text-black' : 'border border-[#595959] text-white hover:bg-white/5'}`}
+                className={`flex items-center gap-2 justify-center w-full h-[34px] rounded-xl transition-all font-mono text-[11px] ${isDrawingMode ? 'bg-cds-interactive text-white' : 'border border-cds-border-subtle text-cds-text-secondary hover:bg-cds-layer1'}`}
               >
                 <span className="material-symbols-outlined text-[18px]">edit</span>
-                <span className="text-[12px]">{isDrawingMode ? 'Drawing...' : 'Enable Pen'}</span>
+                <span>{isDrawingMode ? 'Drawing...' : 'Enable Pen'}</span>
               </button>
               {isDrawingMode && (
-                <div className="flex justify-between items-center bg-[#1a1a1a] p-2 rounded-xl border border-[#595959] w-full">
+                <div className="flex justify-between items-center bg-cds-layer1 p-2 rounded-xl border border-cds-border-subtle w-full">
                   {['#ef4444', '#22c55e', '#3b82f6', '#ffffff'].map((color) => (
                     <button key={color} onClick={() => setDrawColor(color)} className={`w-5 h-5 rounded-full border ${drawColor === color ? 'border-white' : 'border-transparent opacity-60'}`} style={{ backgroundColor: color }} />
                   ))}
@@ -422,10 +422,10 @@ export default function App() {
         </div>
 
         {/* Viewport Area */}
-        <div className="flex-1 flex flex-col relative bg-[#09090b] items-center justify-center p-4">
-          <div className="absolute top-4 z-50 flex border border-[#595959] rounded-xl overflow-hidden bg-[#0e0e0e]/90 backdrop-blur-md">
+        <div className="flex-1 flex flex-col relative bg-cds-background items-center justify-center p-4">
+          <div className="absolute top-4 z-50 flex border border-cds-border-subtle rounded-xl overflow-hidden bg-cds-layer1/90 backdrop-blur-md">
             {(['3D', 'Image'] as const).map((mode) => (
-              <button key={mode} onClick={() => setViewMode(mode)} className={`px-8 h-[36px] text-[12px] font-medium tracking-[0.2px] transition-all ${viewMode === mode ? 'bg-[#969696] text-black' : 'text-white/60 hover:text-white'}`}>
+              <button key={mode} onClick={() => setViewMode(mode)} className={`px-8 h-[36px] text-[12px] font-medium tracking-[0.2px] transition-all font-mono ${viewMode === mode ? 'bg-cds-interactive text-white' : 'text-cds-text-muted hover:text-cds-text-primary'}`}>
                 {mode === '3D' ? '3D VIEW' : 'RESULT'}
               </button>
             ))}
@@ -455,24 +455,24 @@ export default function App() {
               />
             </div>
             <div className={`absolute inset-0 z-20 transition-opacity duration-300 ${viewMode === 'Image' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-              {generatedImage ? <img src={generatedImage} className="w-full h-full object-contain" /> : <div className="w-full h-full bg-[#0c0c0e] flex items-center justify-center text-white/10 flex-col gap-2"><span className="material-symbols-outlined text-[48px]">imagesmode</span><p className="text-[12px]">Generate to see results</p></div>}
+              {generatedImage ? <img src={generatedImage} className="w-full h-full object-contain" /> : <div className="w-full h-full bg-[#0c0c0e] flex items-center justify-center text-white/10 flex-col gap-2"><span className="material-symbols-outlined text-[48px]">imagesmode</span><p className="text-[12px] font-mono">Generate to see results</p></div>}
             </div>
 
             {isGenerating && (
               <div className="absolute inset-0 z-[100] flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm">
                 <div className="w-12 h-12 border-2 border-t-white rounded-full animate-spin mb-4 border-white/20" />
-                <p className="text-[12px] tracking-[3px] uppercase animate-pulse">Processing idea...</p>
+                <p className="text-[12px] tracking-[3px] uppercase animate-pulse font-mono">Processing idea...</p>
               </div>
             )}
           </div>
-          {error && <div className="absolute bottom-8 px-6 py-3 bg-red-900/40 border border-red-500/50 rounded-2xl text-red-200 text-[12px] z-50 backdrop-blur-md">{error}</div>}
+          {error && <div className="absolute bottom-8 px-6 py-3 bg-cds-support-error/20 border border-cds-support-error/50 rounded-2xl text-red-200 text-[12px] z-50 backdrop-blur-md font-mono">{error}</div>}
         </div>
 
         <Sidebar history={history} onRestore={restoreFromHistory} />
       </div>
 
       {/* Bottom Interface */}
-      <div className="border-t border-[rgba(218,220,224,0.15)] bg-[#0e0e0e] px-4 py-4 lg:py-6">
+      <div className="border-t border-cds-border-subtle bg-cds-background px-4 py-4 lg:py-6">
         <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end max-w-[1400px] mx-auto">
           
           {/* Model & Qty Selection */}
@@ -489,8 +489,8 @@ export default function App() {
               <div className="flex gap-2 items-center overflow-x-auto pb-1 custom-scrollbar">
                 {referenceMedia.map((media, idx) => (
                   <div key={idx} className="relative group flex-shrink-0">
-                    <img src={`data:${media.mimeType};base64,${media.base64}`} className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg object-cover border border-[#595959]" />
-                    <button onClick={() => removeReference(idx)} className="absolute -top-1.5 -right-1.5 bg-black border border-[#595959] rounded-full w-5 h-5 flex items-center justify-center text-white/60 hover:text-red-400 group-hover:scale-110 transition-transform">
+                    <img src={`data:${media.mimeType};base64,${media.base64}`} className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg object-cover border border-cds-border-subtle" />
+                    <button onClick={() => removeReference(idx)} className="absolute -top-1.5 -right-1.5 bg-black border border-cds-border-subtle rounded-full w-5 h-5 flex items-center justify-center text-white/60 hover:text-cds-support-error group-hover:scale-110 transition-transform">
                       <span className="material-symbols-outlined text-[14px]">close</span>
                     </button>
                   </div>
@@ -504,13 +504,13 @@ export default function App() {
                 value={framePrompt}
                 onChange={(e) => setFramePrompt(e.target.value)}
                 placeholder="Describe your design concept (e.g. Minimalist spaceship, metallic texture, cinematic lighting)..."
-                className="border border-[#595959] hover:border-[#7a7a7a] focus:border-[#969696] rounded-2xl w-full h-[60px] lg:h-[70px] px-4 py-3 resize-none bg-[#1a1a1a] text-[13px] text-white focus:outline-none transition-all pr-[160px]"
+                className="border border-cds-border-subtle hover:border-cds-border-strong focus:border-cds-interactive rounded-2xl w-full h-[60px] lg:h-[70px] px-4 py-3 resize-none bg-cds-layer1 text-[13px] text-cds-text-primary focus:outline-none transition-all pr-[160px] font-mono"
               />
               <div className="absolute right-2.5 bottom-2.5 flex items-center gap-2">
                 <button 
                   onClick={selectReferenceImages}
                   disabled={isGenerating || referenceMedia.length >= 9}
-                  className="flex items-center justify-center w-[40px] h-[34px] rounded-xl border border-[#595959] hover:bg-white/5 active:bg-white/10 text-white transition-all disabled:opacity-30"
+                  className="flex items-center justify-center w-[40px] h-[34px] rounded-xl border border-cds-border-subtle hover:bg-cds-layer2 active:bg-cds-layer2 text-white transition-all disabled:opacity-30"
                   title="Add reference image"
                 >
                   <span className="material-symbols-outlined text-[20px]">add_photo_alternate</span>

@@ -1,14 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   color-scheme: dark;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+
+  --cds-background: #161616;
+  --cds-layer-01: #262626;
+  --cds-layer-02: #393939;
+
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-muted: #8d8d8d;
+
+  --cds-border-subtle: #393939;
+  --cds-border-strong: #8d8d8d;
+
+  --cds-interactive: #0f62fe;
+  --cds-interactive-hover: #0043ce;
+  --cds-interactive-active: #002d9c;
+
+  --cds-support-error: #da1e28;
+  --cds-support-success: #24a148;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #0f62fe;
 }
 
 body {
   margin: 0;
-  background-color: #09090b;
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  height: 100vh;
 }
 
 @keyframes shimmer {
