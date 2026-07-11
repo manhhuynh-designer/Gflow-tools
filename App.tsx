@@ -21,9 +21,9 @@ const PillButton: React.FC<{
 }> = ({ icon, children, variant = 'filled', onClick, disabled, className = '' }) => {
   const base = 'flex items-center gap-[4px] justify-center h-[34px] rounded-xl font-medium tracking-[0.5px] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-mono';
   const variants: Record<string, string> = {
-    filled: 'bg-cds-layer2 hover:bg-cds-border-strong active:bg-cds-layer1 text-cds-text-primary text-[11px] pl-[8px] pr-[16px] py-1 select-none border border-cds-border-subtle',
-    outline: 'border border-cds-border-subtle hover:bg-cds-layer1 active:bg-cds-layer2 text-[11px] pl-[8px] pr-[16px] py-2 text-cds-text-secondary select-none',
-    solid: 'bg-cds-interactive hover:bg-cds-interactive-hover active:bg-cds-interactive-active text-white text-[11px] pl-[8px] pr-[16px] py-2 select-none',
+    filled: 'bg-cds-layer2 hover:bg-cds-border-strong active:bg-cds-layer1 text-cds-text-primary text-[11px] pl-[8px] pr-[16px] select-none border border-cds-border-subtle',
+    outline: 'border border-cds-border-subtle hover:bg-cds-layer1 active:bg-cds-layer2 text-[11px] pl-[8px] pr-[16px] text-cds-text-secondary select-none',
+    solid: 'bg-cds-interactive hover:bg-cds-interactive-hover active:bg-cds-interactive-active text-white text-[11px] pl-[8px] pr-[16px] select-none border border-transparent',
   };
   return (
     <button className={`${base} ${variants[variant]} ${className}`} onClick={onClick} disabled={disabled}>
@@ -511,7 +511,9 @@ export default function App() {
                   className="flex items-center justify-center w-[40px] h-[34px] rounded-xl border border-cds-border-subtle hover:bg-cds-layer2 active:bg-cds-layer2 text-white transition-all disabled:opacity-30"
                   title="Add reference image"
                 >
-                  <span className="material-symbols-outlined text-[20px]">add_photo_alternate</span>
+                  <span className="flex items-center justify-center w-5 h-5">
+                    <span className="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                  </span>
                 </button>
                 <PillButton 
                   variant="solid" 
