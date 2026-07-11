@@ -1,0 +1,520 @@
+/*
+ * Gflow Tools — Design System Stylesheet
+ * Version: 1.0.0
+ * CDN: https://cdn.jsdelivr.net/gh/manhhuynh-designer/Gflow-tools@main/dist/gflow-tools.css
+ *
+ * This file is loaded via CDN by the Flow Agent.
+ * All visual design tokens, fonts, animations, and utility classes live here.
+ * To update the design, edit this file locally and push to GitHub.
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. FONTS
+   ═══════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+/* ═══════════════════════════════════════════════════════════
+   2. CSS CUSTOM PROPERTIES (Design Tokens)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  color-scheme: dark;
+
+  /* Typography */
+  --gf-font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --gf-font-mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+
+  /* Backgrounds */
+  --gf-bg: #161616;
+  --gf-layer1: #262626;
+  --gf-layer2: #393939;
+
+  /* Text */
+  --gf-text: #f4f4f4;
+  --gf-text-secondary: #c6c6c6;
+  --gf-text-muted: #8d8d8d;
+
+  /* Borders */
+  --gf-border: #393939;
+  --gf-border-strong: #8d8d8d;
+
+  /* Interactive (Blue) */
+  --gf-blue: #0f62fe;
+  --gf-blue-hover: #0043ce;
+  --gf-blue-active: #002d9c;
+
+  /* Status */
+  --gf-error: #da1e28;
+  --gf-success: #24a148;
+  --gf-warning: #f1c21b;
+
+  /* Spacing */
+  --gf-radius: 12px;
+  --gf-radius-lg: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. GLOBAL RESET & BASE
+   ═══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gf-bg);
+  color: var(--gf-text);
+  font-family: var(--gf-font-sans);
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4. SCROLLBAR
+   ═══════════════════════════════════════════════════════════ */
+.gf-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.gf-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+.gf-scroll::-webkit-scrollbar-track { background: transparent; }
+.gf-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+.gf-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ═══════════════════════════════════════════════════════════
+   5. KEYFRAME ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+@keyframes gf-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gf-dropdown {
+  from { opacity: 0; transform: scale(0.95) translateY(-5px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes gf-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gf-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.gf-shimmer { animation: gf-shimmer 1.5s infinite; }
+.gf-dropdown { animation: gf-dropdown 0.15s ease-out forwards; transform-origin: bottom; }
+.gf-spin { animation: gf-spin 1s linear infinite; }
+.gf-pulse { animation: gf-pulse 2s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════════════════════
+   6. TYPOGRAPHY UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+.gf-mono { font-family: var(--gf-font-mono); }
+.gf-sans { font-family: var(--gf-font-sans); }
+
+.gf-label {
+  font-family: var(--gf-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gf-text-secondary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.gf-caption {
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. COMPONENT STYLES
+   ═══════════════════════════════════════════════════════════ */
+
+/* — Panel — */
+.gf-panel {
+  background: var(--gf-bg);
+  border-color: var(--gf-border);
+}
+
+.gf-panel-left {
+  width: 300px;
+  border-right: 1px solid var(--gf-border);
+  padding: 12px 10px;
+}
+
+.gf-panel-right {
+  width: 300px;
+  border-left: 1px solid var(--gf-border);
+}
+
+.gf-panel-bottom {
+  border-top: 1px solid var(--gf-border);
+  padding: 16px;
+}
+
+/* — Card (History item) — */
+.gf-card {
+  background: var(--gf-layer1);
+  border: 1px solid var(--gf-border);
+  border-radius: var(--gf-radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.gf-card:hover {
+  border-color: var(--gf-border-strong);
+  transform: scale(1.02);
+}
+
+/* — Buttons — */
+.gf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 34px;
+  border-radius: var(--gf-radius);
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  border: none;
+  outline: none;
+}
+.gf-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gf-btn-filled {
+  background: var(--gf-layer2);
+  color: var(--gf-text);
+  border: 1px solid var(--gf-border);
+  padding: 0 16px 0 8px;
+}
+.gf-btn-filled:hover:not(:disabled) { background: var(--gf-border-strong); }
+.gf-btn-filled:active:not(:disabled) { background: var(--gf-layer1); }
+
+.gf-btn-outline {
+  background: transparent;
+  color: var(--gf-text-secondary);
+  border: 1px solid var(--gf-border);
+  padding: 0 16px 0 8px;
+}
+.gf-btn-outline:hover:not(:disabled) { background: var(--gf-layer1); }
+.gf-btn-outline:active:not(:disabled) { background: var(--gf-layer2); }
+
+.gf-btn-solid {
+  background: var(--gf-blue);
+  color: white;
+  border: 1px solid transparent;
+  padding: 0 16px 0 8px;
+}
+.gf-btn-solid:hover:not(:disabled) { background: var(--gf-blue-hover); }
+.gf-btn-solid:active:not(:disabled) { background: var(--gf-blue-active); }
+
+/* — Input Field — */
+.gf-field {
+  background: var(--gf-layer1);
+  border: 1px solid var(--gf-border);
+  border-radius: var(--gf-radius);
+  min-height: 49px;
+  padding: 5px 4px 8px 10px;
+  transition: border-color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.gf-field:hover { border-color: var(--gf-border-strong); }
+.gf-field:focus-within { border-color: var(--gf-blue); }
+
+.gf-field-label {
+  font-family: var(--gf-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gf-text-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.gf-field-value {
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gf-text);
+  letter-spacing: 0.1px;
+}
+
+/* — Dropdown Menu — */
+.gf-dropdown-menu {
+  background: var(--gf-layer1);
+  border: 1px solid var(--gf-border);
+  border-radius: var(--gf-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
+}
+
+.gf-dropdown-item {
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  color: var(--gf-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+.gf-dropdown-item:hover { background: var(--gf-layer2); }
+.gf-dropdown-item.active {
+  background: var(--gf-layer2);
+  color: var(--gf-text);
+}
+
+/* — Textarea — */
+.gf-textarea {
+  background: var(--gf-layer1);
+  border: 1px solid var(--gf-border);
+  border-radius: var(--gf-radius-lg);
+  color: var(--gf-text);
+  font-family: var(--gf-font-mono);
+  font-size: 13px;
+  padding: 12px 160px 12px 16px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+.gf-textarea:hover { border-color: var(--gf-border-strong); }
+.gf-textarea:focus { border-color: var(--gf-blue); }
+.gf-textarea::placeholder { color: var(--gf-text-muted); }
+
+/* — Tab Toggle — */
+.gf-tab {
+  font-family: var(--gf-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  padding: 0 32px;
+  height: 36px;
+  transition: all 0.15s ease;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--gf-text-muted);
+}
+.gf-tab:hover { color: var(--gf-text); }
+.gf-tab.active {
+  background: var(--gf-blue);
+  color: white;
+}
+
+/* — Transform Mode Toggle — */
+.gf-toggle-group {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--gf-border);
+  border-radius: var(--gf-radius);
+  overflow: hidden;
+  background: var(--gf-layer1);
+}
+
+.gf-toggle-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  transition: all 0.15s ease;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--gf-text-muted);
+}
+.gf-toggle-item:hover { color: var(--gf-text); }
+.gf-toggle-item.active {
+  background: var(--gf-blue);
+  color: white;
+}
+
+/* — Object List Item — */
+.gf-object-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gf-border);
+  background: var(--gf-layer1);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.gf-object-item:hover { border-color: var(--gf-border-strong); }
+.gf-object-item.selected {
+  border-color: var(--gf-border-strong);
+  background: var(--gf-layer2);
+}
+.gf-object-item .delete-btn {
+  color: var(--gf-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+.gf-object-item .delete-btn:hover { color: var(--gf-error); }
+
+/* — Pen Toggle — */
+.gf-pen-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 34px;
+  border-radius: var(--gf-radius);
+  font-family: var(--gf-font-mono);
+  font-size: 11px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+.gf-pen-btn.inactive {
+  background: transparent;
+  border: 1px solid var(--gf-border);
+  color: var(--gf-text-secondary);
+}
+.gf-pen-btn.inactive:hover { background: var(--gf-layer1); }
+.gf-pen-btn.active {
+  background: var(--gf-blue);
+  color: white;
+}
+
+/* — Color Swatch — */
+.gf-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.1s ease;
+}
+.gf-swatch.selected { border-color: white; }
+.gf-swatch:not(.selected) { opacity: 0.6; }
+
+/* — Loading Overlay — */
+.gf-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+}
+
+.gf-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  animation: gf-spin 1s linear infinite;
+}
+
+.gf-loading-text {
+  font-family: var(--gf-font-mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: gf-pulse 2s ease-in-out infinite;
+}
+
+/* — Error Toast — */
+.gf-error {
+  font-family: var(--gf-font-mono);
+  font-size: 12px;
+  padding: 12px 24px;
+  background: rgba(218, 30, 40, 0.2);
+  border: 1px solid rgba(218, 30, 40, 0.5);
+  border-radius: var(--gf-radius-lg);
+  color: #fca5a5;
+  backdrop-filter: blur(12px);
+}
+
+/* — Reference Thumbnail — */
+.gf-ref-thumb {
+  position: relative;
+  flex-shrink: 0;
+}
+.gf-ref-thumb img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--gf-border);
+}
+.gf-ref-thumb .remove-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background: black;
+  border: 1px solid var(--gf-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.gf-ref-thumb .remove-btn:hover { color: var(--gf-error); transform: scale(1.1); }
+
+/* — Viewport Container — */
+.gf-viewport {
+  position: relative;
+  background: #151515;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* — Empty State — */
+.gf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--gf-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .gf-ref-thumb img {
+    width: 48px;
+    height: 48px;
+  }
+  .gf-textarea {
+    height: 70px;
+  }
+}
