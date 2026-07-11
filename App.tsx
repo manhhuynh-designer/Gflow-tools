@@ -224,18 +224,6 @@ export default function App() {
     e.target.value = '';
   };
 
-  const addPrimitive = (type: 'Cube' | 'Sphere') => {
-    const newObj: SceneObject = {
-      id: Math.random().toString(36).substr(2, 9),
-      type,
-      name: type === 'Cube' ? 'Khối lập phương' : 'Khối cầu',
-      position: [0, 1, 0],
-      rotation: [0, 0, 0],
-      scale: [1, 1, 1]
-    };
-    setSceneObjects(prev => [...prev, newObj]);
-    setSelectedId(newObj.id);
-  };
 
   const handleUpdateObject = useCallback((id: string, updates: Partial<SceneObject>) => {
     setSceneObjects(prev => prev.map(obj => obj.id === id ? { ...obj, ...updates } : obj));
@@ -377,10 +365,6 @@ export default function App() {
                 <div className="flex gap-1 w-full">
                   <PillButton variant="outline" icon={<span className="material-symbols-outlined text-[18px]">upload_file</span>} onClick={() => modelInputRef.current?.click()} className="flex-1">Add GLB</PillButton>
                   <PillButton variant="outline" icon={<span className="material-symbols-outlined text-[18px]">add_photo_alternate</span>} onClick={() => imageInputRef.current?.click()} className="flex-1">Add BG</PillButton>
-                </div>
-                <div className="flex gap-1 w-full">
-                  <PillButton variant="filled" onClick={() => addPrimitive('Cube')} className="flex-1">Cube</PillButton>
-                  <PillButton variant="filled" onClick={() => addPrimitive('Sphere')} className="flex-1">Sphere</PillButton>
                 </div>
                 
                 <div className="mt-2 flex flex-col gap-1 w-full max-h-[200px] overflow-y-auto custom-scrollbar">
