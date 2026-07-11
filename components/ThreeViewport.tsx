@@ -101,10 +101,9 @@ const Scene = ({
       if (controlsRef.current) {
         controlsRef.current.enabled = !event.value;
       }
-    };
-
-    const onChange = () => {
-      if (transform.object && selectedId) {
+      
+      // Save transform to state when dragging stops
+      if (!event.value && transform.object && selectedId) {
         const target = transform.object;
         onUpdateObject(selectedId, {
           position: [target.position.x, target.position.y, target.position.z],
@@ -115,10 +114,8 @@ const Scene = ({
     };
 
     transform.addEventListener('dragging-changed', onDraggingChanged);
-    transform.addEventListener('change', onChange);
     return () => {
       transform.removeEventListener('dragging-changed', onDraggingChanged);
-      transform.removeEventListener('change', onChange);
     };
   }, [selectedId, onUpdateObject]);
 
