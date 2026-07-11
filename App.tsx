@@ -473,33 +473,31 @@ export default function App() {
 
       {/* Bottom Interface */}
       <div className="border-t border-cds-border-subtle bg-cds-background px-4 py-4 lg:py-6">
-        <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end max-w-[1400px] mx-auto">
+        <div className="flex flex-col gap-4 max-w-[1400px] mx-auto">
           
-          {/* Model & Qty Selection */}
-          <div className="grid grid-cols-2 lg:flex gap-2 w-full lg:w-auto">
-            <FieldDropdown label="AI Model" value={selectedModel} options={AI_MODELS} onChange={setSelectedModel} className="flex-1 lg:w-[200px]" />
-            <FieldDropdown label="Qty" value={String(numImages)} options={['1', '2', '4']} onChange={(val) => setNumImages(Number(val))} className="w-full lg:w-[80px]" />
-          </div>
+          {/* References Scroll */}
+          {referenceMedia.length > 0 && (
+            <div className="flex gap-2 items-center overflow-x-auto pb-1 custom-scrollbar">
+              {referenceMedia.map((media, idx) => (
+                <div key={idx} className="relative group flex-shrink-0">
+                  <img src={`data:${media.mimeType};base64,${media.base64}`} className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg object-cover border border-cds-border-subtle" />
+                  <button onClick={() => removeReference(idx)} className="absolute -top-1.5 -right-1.5 bg-black border border-cds-border-subtle rounded-full w-5 h-5 flex items-center justify-center text-white/60 hover:text-cds-support-error group-hover:scale-110 transition-transform">
+                    <span className="material-symbols-outlined text-[14px]">close</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
 
-          {/* Prompt & References Container */}
-          <div className="flex-1 flex flex-col gap-3">
-            
-            {/* References Scroll */}
-            {referenceMedia.length > 0 && (
-              <div className="flex gap-2 items-center overflow-x-auto pb-1 custom-scrollbar">
-                {referenceMedia.map((media, idx) => (
-                  <div key={idx} className="relative group flex-shrink-0">
-                    <img src={`data:${media.mimeType};base64,${media.base64}`} className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg object-cover border border-cds-border-subtle" />
-                    <button onClick={() => removeReference(idx)} className="absolute -top-1.5 -right-1.5 bg-black border border-cds-border-subtle rounded-full w-5 h-5 flex items-center justify-center text-white/60 hover:text-cds-support-error group-hover:scale-110 transition-transform">
-                      <span className="material-symbols-outlined text-[14px]">close</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
+            {/* Model & Qty Selection */}
+            <div className="grid grid-cols-2 lg:flex gap-2 w-full lg:w-auto">
+              <FieldDropdown label="AI Model" value={selectedModel} options={AI_MODELS} onChange={setSelectedModel} className="flex-1 lg:w-[200px]" />
+              <FieldDropdown label="Qty" value={String(numImages)} options={['1', '2', '4']} onChange={(val) => setNumImages(Number(val))} className="w-full lg:w-[80px]" />
+            </div>
 
             {/* Prompt Input Area */}
-            <div className="relative">
+            <div className="flex-1 relative">
               <textarea 
                 value={framePrompt}
                 onChange={(e) => setFramePrompt(e.target.value)}
